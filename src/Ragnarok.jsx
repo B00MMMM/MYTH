@@ -9,6 +9,12 @@ import groundImg from './assets/props/ground.png';
 import text1Img from './assets/props/Text1.png';
 import rockImg from './assets/props/Rock.png';
 import pageBgImg from './assets/bg.jpg';
+import odinImg from './assets/odin_norse_realistic.png';
+import thorImg from './assets/thor_norse_realistic.png';
+import freyjaImg from './assets/freyja_norse_realistic.png';
+import lokiImg from './assets/loki_norse_realistic.png';
+import heimdallImg from './assets/heimdall_norse_realistic.png';
+import text2Img from './assets/props/Text2.png';
 
 // ==========================================
 // RAGNARÖK - NORSE MYTHOLOGY EXPERIENCE
@@ -30,11 +36,11 @@ const REALMS = [
 ];
 
 const GODS = [
-  { name: 'ODIN', title: 'THE ALLFATHER', tags: ['Wisdom', 'War', 'Death', 'Knowledge'], runes: 'ᚨ ᛟ ᚾ', color: 'rgba(197, 160, 89, 0.2)' },
-  { name: 'THOR', title: 'THE THUNDERER', tags: ['Storm', 'Strength', 'Protection'], runes: 'ᚦ ᛟ ᚱ', color: 'rgba(74, 107, 130, 0.2)' },
-  { name: 'FREYJA', title: 'LADY OF VANAHEIM', tags: ['Love', 'Seiðr', 'War'], runes: 'ᚠ ᚱ ᛖ', color: 'rgba(217, 92, 20, 0.2)' },
-  { name: 'LOKI', title: 'THE TRICKSTER', tags: ['Chaos', 'Fire', 'Change'], runes: 'ᛚ ᛟ ᚲ', color: 'rgba(90, 160, 100, 0.2)' },
-  { name: 'HEIMDALL', title: 'THE WATCHER', tags: ['Sight', 'Light', 'Bifröst'], runes: 'ᚺ ᛖ ᛁ', color: 'rgba(220, 220, 220, 0.2)' }
+  { name: 'ODIN', title: 'THE ALLFATHER', tags: ['Wisdom', 'War', 'Death', 'Knowledge'], runes: 'ᚨ ᛟ ᚾ', color: 'rgba(197, 160, 89, 0.2)', image: odinImg },
+  { name: 'THOR', title: 'THE THUNDERER', tags: ['Storm', 'Strength', 'Protection'], runes: 'ᚦ ᛟ ᚱ', color: 'rgba(74, 107, 130, 0.2)', image: thorImg },
+  { name: 'FREYJA', title: 'LADY OF VANAHEIM', tags: ['Love', 'Seiðr', 'War'], runes: 'ᚠ ᚱ ᛖ', color: 'rgba(217, 92, 20, 0.2)', image: freyjaImg },
+  { name: 'LOKI', title: 'THE TRICKSTER', tags: ['Chaos', 'Fire', 'Change'], runes: 'ᛚ ᛟ ᚲ', color: 'rgba(90, 160, 100, 0.2)', image: lokiImg },
+  { name: 'HEIMDALL', title: 'THE WATCHER', tags: ['Sight', 'Light', 'Bifröst'], runes: 'ᚺ ᛖ ᛁ', color: 'rgba(220, 220, 220, 0.2)', image: heimdallImg }
 ];
 
 const SAGAS = [
@@ -292,8 +298,15 @@ const STYLES = `
   .god-panel:last-child { border-right: none; }
   .god-panel:hover { flex: 4; }
   
-  .god-bg-color { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; }
+  .god-bg-color { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; z-index: 1; }
   .god-panel:hover .god-bg-color { opacity: 1; }
+  
+  .god-image {
+    position: absolute; bottom: -5%; left: 50%; transform: translateX(-50%);
+    height: 90%; object-fit: contain; opacity: 0.5; transition: all 0.8s;
+    filter: grayscale(100%); z-index: 2; pointer-events: none;
+  }
+  .god-panel:hover .god-image { opacity: 1; filter: grayscale(0%); transform: translateX(-50%) scale(1.05); }
   
   .god-name-vert {
     writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
@@ -305,6 +318,7 @@ const STYLES = `
     position: absolute; bottom: 0; left: 0; width: 100%; padding: 3rem;
     background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
     opacity: 0; transform: translateY(20px); transition: all 0.5s; pointer-events: none;
+    z-index: 10;
   }
   .god-panel:hover .god-content { opacity: 1; transform: translateY(0); transition-delay: 0.2s; pointer-events: auto; }
   
@@ -554,6 +568,7 @@ export default function Ragnarok() {
   const s1GroundRef = useRef(null);
   const s2TreeRef = useRef(null);
   const s2RockRef = useRef(null);
+  const s2TextRef = useRef(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -598,6 +613,10 @@ export default function Ragnarok() {
       tl.fromTo(s2RockRef.current,
         { opacity: 0, scale: 0.6, xPercent: -20, yPercent: 20 },
         { opacity: 1, scale: 1.1, xPercent: 0, yPercent: 0, ease: 'power1.out', duration: 0.6 }, 0.4
+      );
+      tl.fromTo(s2TextRef.current,
+        { opacity: 0, scale: 0.8, yPercent: -15 },
+        { opacity: 1, scale: 1, yPercent: 0, ease: 'power1.out', duration: 0.6 }, 0.4
       );
 
     }, heroRef);
@@ -766,6 +785,16 @@ export default function Ragnarok() {
           {/* Scene 2 */}
           <div ref={scene2Ref} style={{ position: 'absolute', inset: 0, zIndex: 3, pointerEvents: 'none', display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
             
+            <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)`, zIndex: 2 }}>
+              <div ref={s2TextRef} style={{ position: 'absolute', top: '15%', left: '40%', transform: 'translateX(-50%)', width: '60%', height: 'auto', willChange: 'transform, opacity' }}>
+                <img 
+                  src={text2Img}
+                  alt="Text 2"
+                  style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                />
+              </div>
+            </div>
+
             <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', transform: `translate(${mousePos.x * 2.5}px, ${mousePos.y * 2.5}px)`, zIndex: 5 }}>
               <div ref={s2RockRef} style={{ position: 'absolute', bottom: '-20%', left: '-9%', height: '80%', willChange: 'transform, opacity' }}>
                 <img 
@@ -853,6 +882,7 @@ export default function Ragnarok() {
             {GODS.map((god, i) => (
               <div key={i} className="god-panel interactive">
                 <div className="god-bg-color" style={{ background: god.color }}></div>
+                <img src={god.image} alt={god.name} className="god-image" />
                 <div className="god-name-vert">{god.name}</div>
                 <div className="god-content">
                   <div className="god-runes">{god.runes}</div>
