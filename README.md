@@ -1,16 +1,29 @@
-# React + Vite
+# MYTH - A Norse Mythology Experience
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An interactive React application exploring the realms, gods, and sagas of Norse Mythology. Built with immersive scroll-based parallax animations and a dynamic UI.
 
-Currently, two official plugins are available:
+## Setup and Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/B00MMMM/MYTH.git
+   cd MYTH
+   ```
 
-## React Compiler
+2. **Install dependencies**
+   Ensure you have Node.js installed, then run:
+   ```bash
+   npm install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+   Open your browser and navigate to the local URL (typically `http://localhost:5173`) to view the application.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Technologies
+- **React** - Component architecture and state management
+- **Vite** - Lightning fast development server and build tool
+- **GSAP (GreenSock) & ScrollTrigger** - Advanced scroll-based and timeline animations
+- **Custom CSS** - Pure CSS animations, variables, and responsive layout without external UI libraries
